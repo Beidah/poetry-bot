@@ -43,10 +43,12 @@ def load_chain(fh):
 
 def get_chain():
     chain = {}
-    if os.path.isfile("chain.json"):
-        with open("chain.json", 'r') as fh:
-            chain = load_chain(fh)
-    else:
+    # TODO: Validate that the chain is up-to-date
+    # if os.path.isfile("chain.json"):
+    #     with open("chain.json", 'r') as fh:
+    #         chain = load_chain(fh)
+    # else:
+    if True:
         chain = create_chain()
 
         with open('chain.json', 'w') as outfile:
