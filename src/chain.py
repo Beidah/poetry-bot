@@ -13,6 +13,23 @@ def generate_trigram(words):
         yield (word, words[i + 1], words[i + 2])
 
 
+def strip_words(word1, word2, word3):
+    if word1.strip() == '':
+        word1 = '\n'
+    else:
+        word1 = word1.strip()
+    if word2.strip() == '':
+        word2 = '\n'
+    else:
+        word2 = word2.strip()
+    if word3.strip() == '':
+        word3 = '\n'
+    else:
+        word3 = word3.strip()
+
+    return (word1, word2, word3)
+
+
 def create_chain():
     chain = {}
     words = []
@@ -23,9 +40,11 @@ def create_chain():
             words += line.split(" ")
 
     for word1, word2, word3 in generate_trigram(words):
-        key = (word1.strip(), word2.strip())
+        word1, word2, word3 = strip_words(word1, word2, word3)
+
+        key = (word1, word2)
         if key in chain:
-            chain[key].append(word3.strip())
+            chain[key].append(word3)
         else:
             chain[key] = [word3]
 
