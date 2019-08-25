@@ -23,9 +23,9 @@ def create_chain():
             words += line.split(" ")
 
     for word1, word2, word3 in generate_trigram(words):
-        key = (word1, word2)
+        key = (word1.strip(), word2.strip())
         if key in chain:
-            chain[key].append(word3)
+            chain[key].append(word3.strip())
         else:
             chain[key] = [word3]
 
@@ -55,7 +55,7 @@ def get_chain():
             k = chain.keys()
             v = chain.values()
             j_keys = [str(i) for i in k]
-            json.dump(json.dumps(
-                dict(zip(*[j_keys, v]))), outfile, indent=4, sort_keys=True)
+            json.dump(
+                dict(zip(*[j_keys, v])), outfile, indent=4, sort_keys=True)
 
     return chain
